@@ -1,18 +1,24 @@
 #pragma once
-
-typedef enum {
+typedef enum
+{
     NUMBER,
     STAR,
-    BACKSLASH,
+    FORWARDSLASH,
     HYPHEN,
-    PLUS
+    PLUS,
+    EMPTY,
 } Token_t;
 
-typedef struct {
+typedef struct
+{
     Token_t token;
     union
     {
         int value;
     };
-    
+
 } Token;
+
+Token new_int_token(int number);
+
+void print_token(Token *token);

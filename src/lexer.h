@@ -1,14 +1,16 @@
 #pragma once
-#include "token.h"
 #include "stdlib.h"
-typedef struct {
+#include "token.h"
+typedef struct
+{
     int size;
     int maximum;
-    enum Token* inner;
+    Token *inner;
 } Tokens;
-Tokens lex(char* input);
+Tokens *lex(char *input);
 
-Tokens* new_tokens(int size);
+Tokens *new_tokens(int size);
 
-void push_back(Tokens* tokens, Token item);
-void cleanup(Tokens* tokens);
+void push_back(Tokens *tokens, Token *item);
+void cleanup(Tokens *tokens);
+void print_tokens(Tokens *tokens);

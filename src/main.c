@@ -1,8 +1,9 @@
-#include <stdio.h>
 #include "lexer.h"
-int main() {
-    Tokens* x = (Tokens*)malloc(sizeof(Tokens));
-    x = new_tokens(3);
+#include <stdio.h>
+int main()
+{
 
-    cleanup(x);
+    Tokens *tokens = lex("+/*- 101-3");
+
+    print_tokens(tokens);
 }
