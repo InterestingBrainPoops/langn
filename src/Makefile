@@ -13,7 +13,7 @@ $(ODIR)/%.o: %.c
 	$(CC) -c -o $@ $^ $(CFLAGS)
 
 gran: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -g -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 run:$(OBJ)

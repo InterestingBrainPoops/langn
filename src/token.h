@@ -1,6 +1,4 @@
-
-#ifndef TOKEN
-#define TOKEN
+#pragma once
 
 typedef enum {
     NUMBER,
@@ -18,6 +16,3 @@ typedef struct {
     };
     
 } Token;
-
-
-#endif

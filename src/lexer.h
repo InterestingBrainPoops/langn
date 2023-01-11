@@ -1,26 +1,14 @@
-#ifndef LEXER
-#define LEXER
+#pragma once
 #include "token.h"
 #include "stdlib.h"
 typedef struct {
     int size;
     int maximum;
-    Token* inner;
+    enum Token* inner;
 } Tokens;
+Tokens lex(char* input);
 
-struct Tokens lex(char* input);
+Tokens* new_tokens(int size);
 
-struct Tokens* new_tokens(int size) {
-    struct Tokens out = 
-    return *Tokens {
-        0,
-        size,
-        (Tokens*)malloc(size * sizeof(Token))
-
-    };
-}
-
-void push_back(struct Tokens* tokens, Token item) {
-    // if 
-}
-#endif
+void push_back(Tokens* tokens, Token item);
+void cleanup(Tokens* tokens);
