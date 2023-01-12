@@ -1,16 +1,17 @@
 CC = gcc
 
 ODIR = obj
-
+SRCDIR = src
 LIBS = -lm
-
+IDIR = include
 _OBJ = main.o lexer.o token.o parser.o ast.o
 OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
-DEPS = lexer.h token.h parser.h ast.h
+_DEPS = lexer.h token.h parser.h ast.h
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-$(ODIR)/%.o : %.c 
-	$(CC) -g -c -o $@ $^ $(CFLAGS)
+$(ODIR)/%.o : $(SRCDIR)/%.c
+	$(CC) -g -c -o $@ $^ -I $(IDIR)/ $(CFLAGS)
 
 gran: $(OBJ) 
 	$(CC) -o $@ $^ $(CFLAGS)
@@ -20,7 +21,7 @@ debug: $(OBJ)
 
 .PHONY : run 
 run: $(OBJ) 
-	$(CC) -o -v $@ $^ $(CFLAGS) ./gran
+	$(CC) -o $@ $^ $(CFLAGS) ./gran
 
 .PHONY : clean 
 clean: 
