@@ -1,1 +1,5 @@
-./obj/*
+# Object directory
+obj
+# Executables
+gran
+gran_d
