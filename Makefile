@@ -11,6 +11,7 @@ _DEPS = lexer.h token.h parser.h ast.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 $(ODIR)/%.o : $(SRCDIR)/%.c
+	mkdir $(ODIR)
 	$(CC) -g -c -o $@ $^ -I $(IDIR)/ $(CFLAGS)
 
 gran: $(OBJ) 
