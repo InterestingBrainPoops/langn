@@ -8,3 +8,5 @@ typedef struct
 } Parser;
 
 Node *generate_ast(Parser *parser);
+
+void print_ast(Node* node);

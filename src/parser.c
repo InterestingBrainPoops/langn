@@ -1,20 +1,21 @@
 #include "parser.h"
 #include <stdbool.h>
+#include <stdio.h>
 bool is_at_end(Parser *parser)
 {
-    return parser->current == parser->tokens->size - 1;
+    return parser->current == parser->tokens->size;
 }
 Token current(Parser *parser)
 {
-    return parser->tokens->inner[parser->current];
+    return get_at(parser->tokens, parser->current);
 }
 Token previous(Parser *parser)
 {
-    return parser->tokens->inner[parser->current - 1];
+    return get_at(parser->tokens, parser->current-1);
 }
 Token peek(Parser *parser)
 {
-    return parser->tokens->inner[parser->current + 1];
+    return get_at(parser->tokens, parser->current+1);
 }
 Token advance(Parser *parser)
 {
@@ -42,7 +43,7 @@ Node *primary(Parser *parser)
 {
     Node *out = malloc(sizeof(Node));
 
-    switch (peek(parser).token)
+    switch (current(parser).token)
     {
     case NUMBER:
         out->type = VALUE;
@@ -50,6 +51,11 @@ Node *primary(Parser *parser)
         return out;
 
     default:
+        printf("Unreachable code reached\n");
+        printf("Reached: ");
+        Token temp = current(parser);
+        print_token(&temp);
+        exit(2);
         break;
     }
     return out;
@@ -76,8 +82,10 @@ Node *factor(Parser *parser)
         Node *replace = malloc(sizeof(Node));
         replace->type = BINARY_OP;
         replace->left = node;
-        replace->right = unary(parser);
         replace->binary_operator = previous(parser).token;
+        Token temp = previous(parser);
+        print_token(&temp);
+        replace->right = unary(parser);
         node = replace;
     }
     return node;
@@ -90,10 +98,12 @@ Node *term(Parser *parser)
     {
         Node *replace = malloc(sizeof(Node));
         replace->type = BINARY_OP;
-        replace->left = node;
-        replace->right = factor(parser);
         replace->binary_operator = previous(parser).token;
+        Token temp = previous(parser);
+        print_token(&temp);
+        replace->left = node;
 
+        replace->right = factor(parser);
         node = replace;
     }
     return node;
@@ -102,4 +112,69 @@ Node *term(Parser *parser)
 Node *generate_ast(Parser *parser)
 {
     return term(parser);
+}
+void print_operator(Token_t token) {
+    switch (token)
+    {
+    case PLUS:
+        printf("+");
+        break;
+    case STAR:
+        printf("*");
+        break;
+    case FORWARDSLASH:
+        printf("/");
+        break;
+    case HYPHEN:
+        printf("-");
+        break;
+    default:
+        break;
+    }
+            printf("\n");
+
+}
+
+void print_type(Node* node) {
+    switch (node->type)
+    {
+    case UNARY_OP:
+        printf("UNARY_OP");
+        break;
+    case BINARY_OP:
+        printf("UNARY_OP");
+        break;
+    case VALUE:
+        printf("UNARY_OP");
+        break;
+    
+    default:
+        break;
+    }
+}
+void print_ast(Node* node) {
+    print_type(node);
+    switch (node->type)
+    {
+    case UNARY_OP:
+        printf("Unary Operator: \n");
+        
+        print_operator(node->unary_operator);
+
+        print_ast(node->item);
+        break;
+    case BINARY_OP:
+        printf("Binary Operator: ");
+        print_operator(node->binary_operator);
+        printf("\n");
+        printf("left: \n");
+        print_ast(node->left);
+        printf("right: \n");
+        print_ast(node->right);
+        break;
+    case VALUE:
+        printf("Value: %d \n", node->value);
+    default:
+        break;
+    }
 }

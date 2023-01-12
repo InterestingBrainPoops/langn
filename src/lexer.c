@@ -1,6 +1,15 @@
 #include "lexer.h"
 #include "stdio.h"
 #include <stdbool.h>
+
+Token get_at(Tokens *tokens, int idx) {
+    if (idx < 0 || idx >= tokens->size) {
+        printf("Attempted to index %d in token array of size %d\n", idx, tokens->size);
+        exit(2);
+    }
+
+    return tokens->inner[idx];
+}
 int ctoi(char x)
 {
     switch (x)
@@ -151,7 +160,7 @@ Tokens *new_tokens(int size)
 
     return out;
 }
-void cleanup(Tokens *tokens)
+void cleanup_tokens(Tokens *tokens)
 {
     free(tokens->inner);
     free(tokens);

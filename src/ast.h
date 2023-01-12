@@ -31,3 +31,5 @@ typedef struct Node
         int value;
     };
 } Node;
+
+void cleanup_ast(Node* root);
