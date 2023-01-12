@@ -170,4 +170,5 @@ void push_back(Tokens *tokens, Token *item)
     }
     tokens->inner[tokens->size] = *item;
     tokens->size += 1;
+    free(item);
 }
