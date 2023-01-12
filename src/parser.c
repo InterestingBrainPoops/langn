@@ -11,11 +11,11 @@ Token current(Parser *parser)
 }
 Token previous(Parser *parser)
 {
-    return get_at(parser->tokens, parser->current-1);
+    return get_at(parser->tokens, parser->current - 1);
 }
 Token peek(Parser *parser)
 {
-    return get_at(parser->tokens, parser->current+1);
+    return get_at(parser->tokens, parser->current + 1);
 }
 Token advance(Parser *parser)
 {
@@ -54,7 +54,6 @@ Node *primary(Parser *parser)
         printf("Unreachable code reached\n");
         printf("Reached: ");
         Token temp = current(parser);
-        print_token(&temp);
         exit(2);
         break;
     }
@@ -84,7 +83,6 @@ Node *factor(Parser *parser)
         replace->left = node;
         replace->binary_operator = previous(parser).token;
         Token temp = previous(parser);
-        print_token(&temp);
         replace->right = unary(parser);
         node = replace;
     }
@@ -100,7 +98,6 @@ Node *term(Parser *parser)
         replace->type = BINARY_OP;
         replace->binary_operator = previous(parser).token;
         Token temp = previous(parser);
-        print_token(&temp);
         replace->left = node;
 
         replace->right = factor(parser);
@@ -113,7 +110,8 @@ Node *generate_ast(Parser *parser)
 {
     return term(parser);
 }
-void print_operator(Token_t token) {
+void print_operator(Token_t token)
+{
     switch (token)
     {
     case PLUS:
@@ -131,34 +129,33 @@ void print_operator(Token_t token) {
     default:
         break;
     }
-            printf("\n");
-
 }
 
-void print_type(Node* node) {
+void print_type(Node *node)
+{
     switch (node->type)
     {
     case UNARY_OP:
         printf("UNARY_OP");
         break;
     case BINARY_OP:
-        printf("UNARY_OP");
+        printf("BINARY_OP");
         break;
     case VALUE:
-        printf("UNARY_OP");
+        printf("VALUE");
         break;
-    
+
     default:
         break;
     }
 }
-void print_ast(Node* node) {
-    print_type(node);
+void print_ast(Node *node)
+{
     switch (node->type)
     {
     case UNARY_OP:
         printf("Unary Operator: \n");
-        
+
         print_operator(node->unary_operator);
 
         print_ast(node->item);
@@ -174,6 +171,7 @@ void print_ast(Node* node) {
         break;
     case VALUE:
         printf("Value: %d \n", node->value);
+        break;
     default:
         break;
     }
