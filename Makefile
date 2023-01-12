@@ -10,12 +10,18 @@ OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 _DEPS = lexer.h token.h parser.h ast.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-$(ODIR)/%.o : $(SRCDIR)/%.c
-	mkdir $(ODIR)
+
+
+$(ODIR)/%.o : $(SRCDIR)/%.c | $(ODIR)
 	$(CC) -g -c -o $@ $^ -I $(IDIR)/ $(CFLAGS)
 
 gran: $(OBJ) 
 	$(CC) -o $@ $^ $(CFLAGS)
+
+
+$(ODIR):
+	mkdir -p $@
+
 
 debug: $(OBJ) 
 	$(CC) -g -o gran_d -O0 $^ $(CFLAGS)

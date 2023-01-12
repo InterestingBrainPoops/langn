@@ -32,4 +32,4 @@ typedef struct Node
     };
 } Node;
 
-void cleanup_ast(Node* root);
+void cleanup_ast(Node *root);

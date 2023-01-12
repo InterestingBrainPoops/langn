@@ -7,14 +7,15 @@ int main()
 
     print_tokens(tokens);
 
-    Parser* parser = malloc(sizeof(Parser));
+    Parser *parser = malloc(sizeof(Parser));
     parser->current = 0;
     parser->tokens = tokens;
 
-
     Node *ast = generate_ast(parser);
+    print_ast(ast);
+
+    // cleanup
     free(parser);
     cleanup_tokens(tokens);
-    print_ast(ast);
     cleanup_ast(ast);
 }

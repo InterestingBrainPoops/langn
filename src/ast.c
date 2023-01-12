@@ -1,6 +1,7 @@
 #include "ast.h"
 #include "stdlib.h"
-void cleanup_ast(Node* root) {
+void cleanup_ast(Node *root)
+{
     switch (root->type)
     {
     case UNARY_OP:
