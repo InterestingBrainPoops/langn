@@ -109,13 +109,9 @@ Tokens *lex(char *input)
             */
             if (contains(10, "0123456789", input[idx]))
             {
-                printf("eee%c\n", input[idx]);
-                int storage = ctoi(input[idx]);
-                idx += 1;
+                int storage = 0;
                 while (input[idx] != '\0' && contains(10, "0123456789", input[idx]))
                 {
-                    printf("%d\n", storage);
-
                     storage = storage * 10 + ctoi(input[idx]);
                     idx += 1;
                 }
@@ -125,7 +121,6 @@ Tokens *lex(char *input)
             }
             else
             {
-                printf("D33efault case reached\n");
 
                 trip = true;
                 idx += 1;
@@ -143,7 +138,6 @@ Tokens *lex(char *input)
             free(token);
         }
     }
-    printf("idx: %d\n", idx);
 
     return out;
 }

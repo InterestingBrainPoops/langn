@@ -4,10 +4,10 @@ ODIR = obj
 
 LIBS = -lm
 
-_OBJ = main.o lexer.o token.o
+_OBJ = main.o lexer.o token.o parser.o
 OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
-DEPS = lexer.h token.h 
+DEPS = lexer.h token.h parser.h ast.h
 
 $(ODIR)/%.o : %.c 
 	$(CC) -c -o $@ $^ $(CFLAGS)
