@@ -2,11 +2,24 @@
 typedef enum
 {
     NUMBER,
+    // *
     STAR,
+    // /
     FORWARDSLASH,
+    // -
     HYPHEN,
+    // +
     PLUS,
+    // placeholder / sentinal value
     EMPTY,
+    BANG,
+    GREATERTHAN,
+    LESSTHAN,
+    BANGEQUAL,
+    GREATERTHANEQUAL,
+    LESSTHANEQUAL,
+    EQUAL,
+    EQUALEQUAL
 } Token_t;
 
 typedef struct
