@@ -2,13 +2,11 @@ CC = gcc
 
 ODIR = obj
 SRCDIR = src
-LIBS = -lm
-IDIR = include
-_OBJ = main.o lexer.o token.o parser.o ast.o
-OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
-_DEPS = lexer.h token.h parser.h ast.h
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+IDIR = include
+
+_OBJ = main.o lexer.o token.o parser.o ast.o eval.o tokens.o
+OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
 
 

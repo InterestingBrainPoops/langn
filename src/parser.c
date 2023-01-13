@@ -1,6 +1,7 @@
 #include "parser.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 bool is_at_end(Parser *parser)
 {
     return parser->current == parser->tokens->size;
