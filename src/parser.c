@@ -46,7 +46,7 @@ Node *primary(Parser *parser)
 
     switch (current(parser).token)
     {
-    case NUMBER:
+    case INTEGER_VALUE:
         out->type = VALUE;
         out->value = advance(parser).value;
         return out;

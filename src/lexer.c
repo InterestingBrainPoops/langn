@@ -91,24 +91,62 @@ Tokens *lex(char *input)
         case '-':
             token->token = HYPHEN;
             idx += 1;
-
             break;
         case '/':
-
             token->token = FORWARDSLASH;
             idx += 1;
-
             break;
         case '*':
-
             token->token = STAR;
             idx += 1;
-
             break;
         case ' ':
             trip = true;
             idx += 1;
-
+            break;
+        case '!':
+            token->token = BANG;
+            idx += 1;
+            if (input[idx + 1] != '\0' && input[idx + 1] == '=')
+            {
+                token->token = BANG_EQUAL;
+                idx += 1;
+            }
+            break;
+        case '=':
+            token->token = EQUAL;
+            idx += 1;
+            if (input[idx + 1] != '\0' && input[idx + 1] == '=')
+            {
+                token->token = EQUAL_EQUAL;
+                idx += 1;
+            }
+            break;
+        case '<':
+            token->token = LESS_THAN;
+            idx += 1;
+            if (input[idx + 1] != '\0' && input[idx + 1] == '=')
+            {
+                token->token = LESS_THAN_EQUAL;
+                idx += 1;
+            }
+            break;
+        case '>':
+            token->token = GREATER_THAN;
+            idx += 1;
+            if (input[idx + 1] != '\0' && input[idx + 1] == '=')
+            {
+                token->token = GREATER_THAN_EQUAL;
+                idx += 1;
+            }
+            break;
+        case '(':
+            token->token = OPEN_PAREN;
+            idx += 1;
+            break;
+        case ')':
+            token->token = CLOSE_PAREN;
+            idx += 1;
             break;
         default:
             /*
@@ -126,19 +164,16 @@ Tokens *lex(char *input)
                     storage = storage * 10 + ctoi(input[idx]);
                     idx += 1;
                 }
-                token->token = NUMBER;
+                token->token = INTEGER_VALUE;
                 token->value = storage;
                 break;
             }
             else
             {
 
-                trip = true;
-                idx += 1;
-
-                break;
+                printf("Unexpected character: %c", input[idx]);
+                exit(2);
             }
-            break;
         }
         if (!trip)
         {

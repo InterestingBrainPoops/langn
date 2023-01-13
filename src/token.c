@@ -14,7 +14,7 @@ void print_token(Token *token)
     case HYPHEN:
         printf("HYPHEN");
         break;
-    case NUMBER:
+    case INTEGER_VALUE:
         printf("NUMBER, Value: %d", token->value);
         break;
     case STAR:
@@ -32,7 +32,7 @@ void print_token(Token *token)
 Token new_int_token(int number)
 {
     Token out;
-    out.token = NUMBER;
+    out.token = INTEGER_VALUE;
     out.value = number;
     return out;
 }

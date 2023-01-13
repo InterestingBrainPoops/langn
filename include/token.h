@@ -1,25 +1,42 @@
 #pragma once
 typedef enum
 {
-    NUMBER,
+    // Any integer value (inherently unsigned)
+    INTEGER_VALUE,
     // *
     STAR,
     // /
+    // /
     FORWARDSLASH,
+    // -
     // -
     HYPHEN,
     // +
+    // +
     PLUS,
     // placeholder / sentinal value
+    // placeholder / sentinal value
     EMPTY,
+    // !
     BANG,
-    GREATERTHAN,
-    LESSTHAN,
-    BANGEQUAL,
-    GREATERTHANEQUAL,
-    LESSTHANEQUAL,
+    // >
+    GREATER_THAN,
+    // <
+    LESS_THAN,
+    // !=
+    BANG_EQUAL,
+    // >=
+    GREATER_THAN_EQUAL,
+    // <=
+    LESS_THAN_EQUAL,
+    // =
     EQUAL,
-    EQUALEQUAL
+    // ==
+    EQUAL_EQUAL,
+    // (
+    OPEN_PAREN,
+    // )
+    CLOSE_PAREN,
 } Token_t;
 
 typedef struct
@@ -31,7 +48,5 @@ typedef struct
     };
 
 } Token;
-
-Token new_int_token(int number);
 
 void print_token(Token *token);
